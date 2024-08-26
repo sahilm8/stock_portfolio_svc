@@ -10,9 +10,6 @@ your data is safe from unauthorized access.
 
 ## Stack
 
-- React.js
-- Redux
-- Auth0
 - Java
 - Spring
 - MySQL
