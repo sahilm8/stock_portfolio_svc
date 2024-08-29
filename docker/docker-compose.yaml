@@ -22,7 +22,7 @@ services:
     volumes:
       - ./docker/config:/etc/mysql/conf.d # Where MySQL looks for config scripts.
       - ./docker/setup/init.sql:/docker-entrypoint-initdb.d/init.sql # Where MySQL looks for init scripts.
-      - eds_db_volume:/var/lib/mysql # Uses named volume for persisting MySQL data.
+      - eds_db_data:/var/lib/mysql # Uses named volume for persisting MySQL data.
 
 volumes:
-  eds_db_volume:
+  eds_db_data:
