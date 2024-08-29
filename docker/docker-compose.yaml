@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3307/eds_staging
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: eds_staging
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+      - ./docker/config:/etc/mysql/conf.d # Where MySQL looks for config scripts.
+      - ./docker/setup/init.sql:/docker-entrypoint-initdb.d/init.sql # Where MySQL looks for init scripts.
+      - eds_db_volume:/var/lib/mysql # Uses named volume for persisting MySQL data.
+
+volumes:
+  eds_db_volume:
