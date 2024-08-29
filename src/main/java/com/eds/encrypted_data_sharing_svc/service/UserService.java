@@ -43,9 +43,6 @@ public class UserService {
             user.setPublicKey(publicKeyBase64);
             user.setPrivateKey(privateKeyBase64);
 
-            log.info("Public Key: " + publicKeyBase64);
-            log.info("Private Key: " + privateKeyBase64);
-
             return userRepository.save(user);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Failed to generate key pair", e.getCause());
