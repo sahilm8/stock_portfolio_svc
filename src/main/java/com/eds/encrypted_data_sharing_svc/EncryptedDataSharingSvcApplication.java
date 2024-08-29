@@ -9,7 +9,7 @@ import java.util.Base64;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.eds.encrypted_data_sharing_svc.util.KeyPairGeneratorUtil;
+import com.eds.encrypted_data_sharing_svc.util.EncryptionUtil;
 
 @SpringBootApplication
 public class EncryptedDataSharingSvcApplication {
@@ -17,7 +17,7 @@ public class EncryptedDataSharingSvcApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EncryptedDataSharingSvcApplication.class, args);
 		try {
-			KeyPair keyPair = KeyPairGeneratorUtil.generateKeyPair();
+			KeyPair keyPair = EncryptionUtil.generateKeyPair();
 			PublicKey publicKey = keyPair.getPublic();
 			PrivateKey privateKey = keyPair.getPrivate();
 
