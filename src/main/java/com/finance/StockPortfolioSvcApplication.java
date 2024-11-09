@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 public class StockPortfolioSvcApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StockPortfolioSvcApplication.class, args);
-		log.info("*** Service Activated ***");
-
+		log.info("*** Stock Portfolio Service Activated ***");
 	}
 }
