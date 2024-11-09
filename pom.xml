@@ -8,17 +8,21 @@
 		<version>3.3.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.eds</groupId>
-	<artifactId>encrypted_data_sharing_svc</artifactId>
+	<groupId>com.finance</groupId>
+	<artifactId>stock_portfolio_svc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>encrypted_data_sharing_svc</name>
-	<description>Service for Encrypted Data Sharing</description>
+	<name>stock_portfolio_svc</name>
+	<description>Stock Portfolio Service</description>
 	<url/>
 	<licenses>
-		<license/>
+	<license/>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<name>Sahil Memon</name>
+			<url>https://github.com/sahilm8</url>
+		</developer>
+	<developer/>
 	</developers>
 	<scm>
 		<connection/>
@@ -38,7 +42,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
@@ -55,7 +58,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -72,5 +74,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
