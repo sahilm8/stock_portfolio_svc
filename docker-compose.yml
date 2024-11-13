@@ -1,21 +1,22 @@
 services:
-  stock_portfolio_svc: # Service name
-    image: mysql:latest # Base MySQL image from Docker Hub
+  stock_portfolio_svc:
+    image: mysql:latest # Base MySQL image
     container_name: stock_portfolio_container
-    environment: # Environment variables for MySQL configuration
+    environment: # MySQL config
       MYSQL_DATASOURCE_URL: ${DB_URL}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATASOURCE_USERNAME: ${DB_USERNAME}
       MYSQL_DATASOURCE_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "3306:3306" # Port mapping (host:container)
+      - "3306:3306" # host:container
+    command: ["mysqld", "--pid-file=/var/lib/mysql/mysqld.pid"]
     volumes:
+      - ./docker/setup:/docker-entrypoint-initdb.d # Setup scripts
       - mysql_data:/var/lib/mysql # Persistent data storage
-      - ./docker/setup:/docker-entrypoint-initdb.d # Initialisation scripts
-    healthcheck: # Container health monitoring
+    healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
-volumes: # Named volume for data persistence
-  mysql_data:
+volumes:
+  mysql_data: # Persistent data storage volume
