@@ -1,5 +1,4 @@
-CREATE DATABASE IF NOT EXISTS stock_portfolio_db;
-USE stock_portfolio_db;
+USE stock_portfolio_staging_db;
 
 CREATE TABLE IF NOT EXISTS users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
