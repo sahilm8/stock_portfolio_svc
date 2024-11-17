@@ -9,5 +9,4 @@
 - Java
 - Spring
 - MySQL
-- Docker
 - AWS
