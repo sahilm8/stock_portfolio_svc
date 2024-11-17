@@ -1,6 +1,7 @@
 package com.finance.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import com.finance.model.User;
@@ -12,28 +13,35 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
+    @GetMapping(value = "/", produces = MediaType.TEXT_PLAIN_VALUE)
     public String home() {
-        return "Welcome to the Stock Portfolio Service!";
+        return String.format(
+                "Stock Portfolio Service%n%n" +
+                        "Welcome to the users endpoint, you can make the following requests:%n" +
+                        "- POST /new-user%n" +
+                        "- GET /get-user%n" +
+                        "- GET /does-user-exist%n" +
+                        "- DELETE /delete-user%n");
     }
 
-    @PostMapping("/new-user")
+    @PostMapping(value = "/new-user", produces = MediaType.TEXT_PLAIN_VALUE)
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 
-    @GetMapping("/get-user")
+    @GetMapping(value = "/get-user", produces = MediaType.TEXT_PLAIN_VALUE)
     public User getUser(@RequestBody String email) {
-        return userService.getUser(email);
+        return userService.getUser(email.trim());
     }
 
-    @GetMapping("/does-user-exist")
+    @GetMapping(value = "/does-user-exist", produces = MediaType.TEXT_PLAIN_VALUE)
     public boolean doesUserExist(@RequestBody String email) {
-        return userService.doesUserExist(email);
+        return userService.doesUserExist(email.trim());
     }
 
-    @DeleteMapping("/delete-user")
-    public void deleteUser(@RequestBody User user) {
+    @DeleteMapping(value = "/delete-user", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String deleteUser(@RequestBody User user) {
         userService.deleteUser(user);
+        return "User deleted successfully";
     }
 }
