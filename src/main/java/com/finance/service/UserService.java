@@ -14,12 +14,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User createUser(User user) throws RuntimeException {
-        try {
-            return userRepository.save(user);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage(), e.getCause());
-        }
+    public User createUser(User user) {
+        return userRepository.save(user);
     }
 
     public User getUser(String email) {

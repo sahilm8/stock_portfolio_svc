@@ -13,7 +13,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "/", produces = MediaType.TEXT_PLAIN_VALUE)
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public String home() {
         return String.format(
                 "Stock Portfolio Service%n%n" +
@@ -24,22 +24,22 @@ public class UserController {
                         "- DELETE /delete-user%n");
     }
 
-    @PostMapping(value = "/new-user", produces = MediaType.TEXT_PLAIN_VALUE)
+    @PostMapping(value = "/new-user", produces = MediaType.APPLICATION_JSON_VALUE)
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 
-    @GetMapping(value = "/get-user", produces = MediaType.TEXT_PLAIN_VALUE)
+    @GetMapping(value = "/get-user", produces = MediaType.APPLICATION_JSON_VALUE)
     public User getUser(@RequestBody String email) {
         return userService.getUser(email.trim());
     }
 
-    @GetMapping(value = "/does-user-exist", produces = MediaType.TEXT_PLAIN_VALUE)
+    @GetMapping(value = "/does-user-exist", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean doesUserExist(@RequestBody String email) {
         return userService.doesUserExist(email.trim());
     }
 
-    @DeleteMapping(value = "/delete-user", produces = MediaType.TEXT_PLAIN_VALUE)
+    @DeleteMapping(value = "/delete-user", produces = MediaType.APPLICATION_JSON_VALUE)
     public String deleteUser(@RequestBody User user) {
         userService.deleteUser(user);
         return "User deleted successfully";
