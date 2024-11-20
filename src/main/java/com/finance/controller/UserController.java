@@ -25,23 +25,17 @@ public class UserController {
     }
 
     @PostMapping(value = "/new-user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public User createUser(@RequestBody User user) {
+    public String createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 
     @GetMapping(value = "/get-user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public User getUser(@RequestBody String email) {
+    public String getUser(@RequestBody String email) {
         return userService.getUser(email.trim());
     }
 
-    @GetMapping(value = "/does-user-exist", produces = MediaType.APPLICATION_JSON_VALUE)
-    public boolean doesUserExist(@RequestBody String email) {
-        return userService.doesUserExist(email.trim());
-    }
-
     @DeleteMapping(value = "/delete-user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String deleteUser(@RequestBody User user) {
-        userService.deleteUser(user);
-        return "User deleted successfully";
+    public String deleteUser(@RequestBody String email) {
+        return userService.deleteUser(email.trim());
     }
 }
