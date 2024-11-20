@@ -6,10 +6,7 @@ import org.springframework.stereotype.Service;
 import com.finance.model.User;
 import com.finance.repository.UserRepository;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
-@Slf4j
 public class UserService {
     @Autowired
     private UserRepository userRepository;
