@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import com.finance.model.User;
 import com.finance.service.UserService;
 
+// TODO: Add JWT authentication.
+
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
