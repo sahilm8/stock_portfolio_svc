@@ -39,5 +39,5 @@ public class Portfolio {
     private List<Stock> stocks;
 
     @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal portfolioValue;
+    private BigDecimal portfolioValue = BigDecimal.ZERO;
 }
