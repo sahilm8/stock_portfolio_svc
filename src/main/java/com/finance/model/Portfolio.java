@@ -34,7 +34,7 @@ public class Portfolio {
     private User user;
 
     @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal portfolioValue;
+    private BigDecimal portfolioValue = BigDecimal.ZERO;
 
     @ManyToMany
     @JoinTable(joinColumns = @JoinColumn(name = "portfolio_id"), inverseJoinColumns = @JoinColumn(name = "stock_id"))
