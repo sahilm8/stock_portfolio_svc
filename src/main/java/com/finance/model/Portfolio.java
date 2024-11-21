@@ -30,7 +30,7 @@ public class Portfolio {
     @Column(nullable = false)
     private String portfolioDescription;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
