@@ -4,17 +4,19 @@ import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.finance.model.Portfolio;
 import com.finance.repository.PortfolioRepository;
 
 @Service
+@Transactional
 public class PortfolioService {
     @Autowired
     private PortfolioRepository portfolioRepository;
 
     public String createPortfolio(Portfolio portfolio) {
-        if (!portfolioRepository.findByPortfolioName(portfolio.getPortfolioName()).isPresent()) {
+        if (portfolioRepository.findByPortfolioName(portfolio.getPortfolioName()).isEmpty()) {
             portfolio.setPortfolioValue(
                     portfolio.getStocks().stream()
                             .map(stock -> stock.getStockPrice().multiply(stock.getStockQuantity()))
