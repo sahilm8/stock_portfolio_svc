@@ -11,14 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.finance.model.Portfolio;
 import com.finance.service.PortfolioService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/api/v1/portfolios")
+@Slf4j
 public class PortfolioController {
     @Autowired
-    private PortfolioService portfolioService;
+    private static PortfolioService portfolioService;
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String home() {
+    public static String home() {
+        log.info("Received request to GET /home.");
         return String.format(
                 "Stock Portfolio Service%n%n" +
                         "Welcome to the portfolios endpoint, you can make the following requests:%n" +
@@ -26,8 +30,9 @@ public class PortfolioController {
     }
 
     @PostMapping(value = "/new-portfolio", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String createPortfolio(
+    public static String createPortfolio(
             @RequestBody Portfolio portfolio) {
+        log.info("Received request to POST /new-portfolio with argument: " + portfolio.toString());
         return portfolioService.createPortfolio(portfolio);
     }
 }
