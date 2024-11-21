@@ -20,7 +20,7 @@ public class PortfolioService {
                             .map(stock -> stock.getStockPrice().multiply(stock.getStockQuantity()))
                             .reduce(BigDecimal.ZERO, BigDecimal::add));
             portfolioRepository.save(portfolio);
-            return "Portfolio has been created successfully.";
+            return "Portfolio created successfully.";
         }
         return "Portfolio with the given name already exists.";
     }

@@ -12,26 +12,23 @@ public class UserService {
     private UserRepository userRepository;
 
     public String createUser(User user) {
-        User existingUser = userRepository.findByEmail(user.getEmail()).orElse(null);
-        if (existingUser == null) {
-            User newUser = userRepository.save(user);
-            return "User created successfully: " + newUser.toString();
+        if (!userRepository.findByEmail(user.getEmail()).isPresent()) {
+            userRepository.save(user);
+            return "User created successfully.";
         }
         return "User with the given email address already exists.";
     }
 
     public String getUser(String email) {
-        User existingUser = userRepository.findByEmail(email).orElse(null);
-        if (existingUser != null) {
-            return "User found: " + existingUser.toString();
+        if (userRepository.findByEmail(email).isPresent()) {
+            return "User found: " + userRepository.findByEmail(email).toString();
         }
         return "User with the given email address does not exist.";
     }
 
     public String deleteUser(String email) {
-        User existingUser = userRepository.findByEmail(email).orElse(null);
-        if (existingUser != null) {
-            userRepository.delete(existingUser);
+        if (userRepository.findByEmail(email).isPresent()) {
+            userRepository.delete(userRepository.findByEmail(email).get());
             return "User deleted successfully.";
         }
         return "User with the given email address does not exist.";
