@@ -29,9 +29,6 @@ public class Stock {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal stockPrice = BigDecimal.ZERO;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal stockQuantity = BigDecimal.ZERO;
-
     @ManyToMany(mappedBy = "stocks")
     private List<Portfolio> portfolios;
 }

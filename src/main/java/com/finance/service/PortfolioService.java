@@ -16,10 +16,11 @@ public class PortfolioService {
     private PortfolioRepository portfolioRepository;
 
     public String createPortfolio(Portfolio portfolio) {
+        // TODO: Add current user based on JWT authentication.
         if (portfolioRepository.findByPortfolioName(portfolio.getPortfolioName()).isEmpty()) {
             portfolio.setPortfolioValue(
                     portfolio.getStocks().stream()
-                            .map(stock -> stock.getStockPrice().multiply(stock.getStockQuantity()))
+                            .map(stock -> stock.getStockPrice())
                             .reduce(BigDecimal.ZERO, BigDecimal::add));
             portfolioRepository.save(portfolio);
             return "Portfolio created successfully.";
