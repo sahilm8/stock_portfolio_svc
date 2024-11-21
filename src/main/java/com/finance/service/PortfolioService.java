@@ -14,7 +14,7 @@ public class PortfolioService {
     private PortfolioRepository portfolioRepository;
 
     public String createPortfolio(Portfolio portfolio) {
-        if (portfolioRepository.findByPortfolioName(portfolio.getPortfolioName()) == null) {
+        if (portfolioRepository.findByPortfolioName(portfolio.getPortfolioName()).orElse(null) == null) {
             portfolio.setPortfolioValue(
                     portfolio.getStocks().stream()
                             .map(stock -> stock.getStockPrice().multiply(stock.getStockQuantity()))
