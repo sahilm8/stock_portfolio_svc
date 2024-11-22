@@ -9,4 +9,9 @@
 - Java
 - Spring
 - MySQL
+- Docker
 - AWS
+
+## Architecture
+
+<img src="./architecture.png" width="900" alt="Image description">
