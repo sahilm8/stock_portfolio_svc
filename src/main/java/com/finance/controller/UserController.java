@@ -26,7 +26,6 @@ public class UserController {
                         "Welcome to the users endpoint, you can make the following requests:%n" +
                         "- POST /new-user%n" +
                         "- GET /get-user%n" +
-                        "- GET /does-user-exist%n" +
                         "- DELETE /delete-user%n");
     }
 
