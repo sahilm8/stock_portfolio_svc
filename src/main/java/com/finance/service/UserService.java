@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserService {
     @Autowired
-    private static UserRepository userRepository;
+    private UserRepository userRepository;
 
     public String createUser(User user) {
         if (userRepository.findByEmail(user.getEmail()).isEmpty()) {

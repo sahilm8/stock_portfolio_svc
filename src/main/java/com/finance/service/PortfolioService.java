@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PortfolioService {
     @Autowired
-    private static PortfolioRepository portfolioRepository;
+    private PortfolioRepository portfolioRepository;
 
     public String createPortfolio(Portfolio portfolio) {
         // TODO: Add current user based on JWT authentication.

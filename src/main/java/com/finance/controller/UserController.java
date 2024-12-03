@@ -16,10 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserController {
     @Autowired
-    private static UserService userService;
+    private UserService userService;
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public static String home() {
+    public String home() {
         log.info("Received request to GET /home.");
         return String.format(
                 "Stock Portfolio Service%n%n" +
@@ -30,19 +30,19 @@ public class UserController {
     }
 
     @PostMapping(value = "/new-user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public static String createUser(@RequestBody User user) {
+    public String createUser(@RequestBody User user) {
         log.info("Received request to POST /new-user with argument: " + user.toString());
         return userService.createUser(user);
     }
 
     @GetMapping(value = "/get-user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public static String getUser(@RequestBody String email) {
+    public String getUser(@RequestBody String email) {
         log.info("Received request to GET /get-user with argument: " + email.trim());
         return userService.getUser(email.trim());
     }
 
     @DeleteMapping(value = "/delete-user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public static String deleteUser(@RequestBody String email) {
+    public String deleteUser(@RequestBody String email) {
         log.info("Received request to DELETE /delete-user with argument: " + email.trim());
         return userService.deleteUser(email.trim());
     }

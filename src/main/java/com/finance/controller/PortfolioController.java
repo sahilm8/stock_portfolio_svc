@@ -18,10 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PortfolioController {
     @Autowired
-    private static PortfolioService portfolioService;
+    private PortfolioService portfolioService;
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public static String home() {
+    public String home() {
         log.info("Received request to GET /home.");
         return String.format(
                 "Stock Portfolio Service%n%n" +
@@ -30,7 +30,7 @@ public class PortfolioController {
     }
 
     @PostMapping(value = "/new-portfolio", produces = MediaType.APPLICATION_JSON_VALUE)
-    public static String createPortfolio(
+    public String createPortfolio(
             @RequestBody Portfolio portfolio) {
         log.info("Received request to POST /new-portfolio with argument: " + portfolio.toString());
         return portfolioService.createPortfolio(portfolio);
