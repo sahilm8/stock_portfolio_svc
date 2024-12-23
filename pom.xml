@@ -5,24 +5,29 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.3</version>
+		<version>3.3.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.finance</groupId>
-	<artifactId>stock_portfolio_svc</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>com.sahil</groupId>
+	<artifactId>stock.portfolio</artifactId>
+	<version>0.0.1</version>
 	<name>stock_portfolio_svc</name>
-	<description>Stock Portfolio Service</description>
+	<description>
+		API to manage stock portfolios by deploying automated trading strategies.
+	</description>
 	<url/>
 	<licenses>
-	<license/>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+			<distribution>repo</distribution>
+		</license>
 	</licenses>
 	<developers>
 		<developer>
 			<name>Sahil Memon</name>
 			<url>https://github.com/sahilm8</url>
 		</developer>
-	<developer/>
 	</developers>
 	<scm>
 		<connection/>
@@ -38,6 +43,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<version>3.3.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+			<version>3.3.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-core</artifactId>
+			<version>3.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -64,6 +79,18 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<version>3.3.5</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>2.3.232</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-resolver-dns-native-macos</artifactId>
+			<version>4.1.115.Final</version>
+			<classifier>osx-aarch_64</classifier>
 		</dependency>
 	</dependencies>
 	<build>
