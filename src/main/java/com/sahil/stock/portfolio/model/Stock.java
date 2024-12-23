@@ -30,12 +30,6 @@ public class Stock {
     @Column(nullable = false)
     private String currency;
 
-    @Column(nullable = false)
-    private Double totalNumberOfStocks = 0.0;
-
-    @Column(nullable = false, precision = 10, scale = 4)
-    private BigDecimal totalValue = BigDecimal.ZERO;
-
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal price = BigDecimal.ZERO;
 
@@ -54,6 +48,9 @@ public class Stock {
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal volume = BigDecimal.ZERO;
 
-    @ManyToMany(mappedBy = "stocksList")
+    @ManyToMany(mappedBy = "stocksInPortfolio")
     private List<Portfolio> portfolios;
+
+    @ManyToMany(mappedBy = "stocksInOrder")
+    private List<Portfolio> orders;
 }

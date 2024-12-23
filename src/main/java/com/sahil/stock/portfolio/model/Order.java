@@ -5,20 +5,16 @@ import java.sql.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
 import lombok.Data;
 
-@Entity
-@Table(name = "portfolios")
 @Data
-public class Portfolio {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,7 +26,10 @@ public class Portfolio {
     private String name;
 
     @Column(nullable = false)
-    private String desc;
+    private String symbol;
+
+    @Column(nullable = false)
+    private String currency;
 
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal totalValue = BigDecimal.ZERO;
@@ -42,6 +41,6 @@ public class Portfolio {
     private BigDecimal totalNumberOfStocks = BigDecimal.ZERO;
 
     @ManyToMany
-    @JoinTable(joinColumns = @JoinColumn(name = "portfolio_id"), inverseJoinColumns = @JoinColumn(name = "stock_id"))
-    private List<Stock> stocksInPortfolio;
+    @JoinTable(joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "stock_id"))
+    private List<Stock> stocksInOrder;
 }
