@@ -23,12 +23,6 @@ public class Order {
     private Date createdAt;
 
     @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String symbol;
-
-    @Column(nullable = false)
     private String currency;
 
     @Column(nullable = false, precision = 10, scale = 4)

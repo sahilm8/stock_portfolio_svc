@@ -1,6 +1,7 @@
 package com.sahil.stock.portfolio.model;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.List;
 
 
@@ -20,6 +21,9 @@ public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private Date createdAt;
 
     @Column(nullable = false)
     private String name;
