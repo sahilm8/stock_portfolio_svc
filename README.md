@@ -39,7 +39,7 @@ docker pull mysql:latest
 
 - Create an external volume for storing MySQL data:
 ```
-docker volume create mysql_volume
+docker volume create stock_portfolio_volume
 ```
 
 - Run the container:
