@@ -29,4 +29,25 @@ public class PortfolioService {
         log.info("Portfolio already exists: " + portfolio.toString());
         return null;
     }
+
+    public Portfolio getPortfolio(String name) {
+        if (portfolioRepository.findByName(name).isPresent()) {
+            Portfolio portfolio = portfolioRepository.findByName(name).get();
+            log.info("Portfolio found: " + portfolio.toString());
+            return portfolio;
+        }
+        log.info("Portfolio not found: " + name);
+        return null;
+    }
+
+    public boolean deletePortfolio(String name) {
+        if (portfolioRepository.findByName(name).isPresent()) {
+            Portfolio portfolio = portfolioRepository.findByName(name).get();
+            portfolioRepository.delete(portfolio);
+            log.info("Portfolio deleted: " + name);
+            return true;
+        }
+        log.info("Portfolio not found: " + name);
+        return false;
+    }
 }
