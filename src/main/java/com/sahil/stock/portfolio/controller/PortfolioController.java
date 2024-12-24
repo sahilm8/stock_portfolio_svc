@@ -34,9 +34,9 @@ public class PortfolioController {
     }
 
     @PostMapping(value = "/add-portfolio", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Portfolio> addPortfolio(@RequestParam Portfolio portfolio) {
-        log.info("Received request to POST /add-portfolio with argument: " + portfolio.toString());
-        Portfolio response = portfolioService.addPortfolio(portfolio);
+    public ResponseEntity<Portfolio> addPortfolio(@RequestParam String name, @RequestParam String desc) {
+        log.info("Received request to POST /add-portfolio with arguments: " + name.trim() + ", " + desc.trim());
+        Portfolio response = portfolioService.addPortfolio(name.trim(), desc.trim());
         if (response != null) {
             return ResponseEntity.ok(response);
         }
