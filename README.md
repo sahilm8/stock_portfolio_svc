@@ -69,42 +69,25 @@ Requests can be made to get the following resources:
     - Total value
     - Number of companies
     - Number of stocks
-    - Global Quote
-- Stock Time Series Intraday
-    - OHLCV
-    - Adjusted
-    - Including extended hours
-    - Intervals: 1min, 5min, 15min, 30min, 60min
-- Stock Time Series Daily
-    - OHLCV
-    - Not adjusted
-- Stock Time Series Weekly
-    - OHLCV
-    - Adjusted
-- Stock Time Series Monthly
-    - OHLCV
-    - Adjusted
-
-Instances can be created, fetched, or deleted for the default model class whose data is stored in a Docker MySQL volume (mysql_volume).
 
 ### Requests
 
 - GET /:
 ```
-curl -i -X GET http://localhost:8080/api/v1/model/
+curl -i -X GET http://localhost:8080/api/v1/portfolio/
 ```
 
-- POST /new-model: 
+- POST /add-portfolio: 
 ```
-curl -i -X POST "http://localhost:8080/api/v1/model/new-model?name=ABC"
-```
-
-- GET /get-model:
-```
-curl -i -X GET "http://localhost:8080/api/v1/model/get-model?name=ABC"
+curl -i -X POST "http://localhost:8080/api/v1/portfolio/add-portfolio?name=Test&desc=Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 ```
 
-- DELETE /delete-model:
+- GET /get-portfolio:
 ```
-curl -i -X DELETE "http://localhost:8080/api/v1/model/delete-model?name=ABC"
+curl -i -X GET "http://localhost:8080/api/v1/portfolio/get-portfolio?name=Test"
+```
+
+- DELETE /delete-portfolio:
+```
+curl -i -X DELETE "http://localhost:8080/api/v1/portfolio/delete-portfolio?name=Test"
 ```
