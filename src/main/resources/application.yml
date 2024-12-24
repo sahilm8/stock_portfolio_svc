@@ -1,5 +1,5 @@
 spring:
-  appllication:
+  application:
     name: stock_portfolio_svc
   datasource:
     url: jdbc:mysql://localhost:3306/${MYSQL_DATABASE}

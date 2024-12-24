@@ -1,5 +1,5 @@
 services:
-  mysql:
+  stock_portfolio_svc:
     image: mysql:latest
     container_name: stock_portfolio_container
     environment:
