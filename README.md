@@ -59,6 +59,32 @@ docker compose down
 
 ## Endpoints
 
+Requests can be made to get the following resources:
+
+- Portfolio
+    - Created At
+    - Name
+    - Desc
+    - Currency
+    - Total value
+    - Number of companies
+    - Number of stocks
+    - Global Quote
+- Stock Time Series Intraday
+    - OHLCV
+    - Adjusted
+    - Including extended hours
+    - Intervals: 1min, 5min, 15min, 30min, 60min
+- Stock Time Series Daily
+    - OHLCV
+    - Not adjusted
+- Stock Time Series Weekly
+    - OHLCV
+    - Adjusted
+- Stock Time Series Monthly
+    - OHLCV
+    - Adjusted
+
 Instances can be created, fetched, or deleted for the default model class whose data is stored in a Docker MySQL volume (mysql_volume).
 
 ### Requests

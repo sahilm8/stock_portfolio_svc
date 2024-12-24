@@ -36,6 +36,9 @@ public class Portfolio {
     @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false)
+    private String currency;
+
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal totalValue = BigDecimal.ZERO;
 
