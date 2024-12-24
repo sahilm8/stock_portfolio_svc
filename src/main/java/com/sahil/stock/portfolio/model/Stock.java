@@ -2,7 +2,8 @@ package com.sahil.stock.portfolio.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -54,9 +55,9 @@ public class Stock {
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal volume = BigDecimal.ZERO;
 
-    @ManyToMany(mappedBy = "stocksInPortfolio")
-    private List<Portfolio> portfolios;
+    @ManyToMany(mappedBy = "stocks")
+    private Set<Portfolio> portfolios = new HashSet<>();
 
-    @ManyToMany(mappedBy = "stocksInOrder")
-    private List<Order> orders;
+    @ManyToMany(mappedBy = "stocks")
+    private Set<Order> orders = new HashSet<>();
 }
