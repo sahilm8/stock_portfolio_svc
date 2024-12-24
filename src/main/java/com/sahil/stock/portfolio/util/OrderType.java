@@ -1,13 +1,12 @@
 package com.sahil.stock.portfolio.util;
 
-public enum OrderStatus {
-    CREATED("CREATED"),
-    PENDING("PENDING"),
-    COMPLETED("COMPLETED");
+public enum OrderType {
+    BUY("BUY"),
+    SELL("SELL");
     
     private final String value;
     
-    OrderStatus(String value) {
+    OrderType(String value) {
         this.value = value;
     }
 
