@@ -20,7 +20,7 @@ public class PortfolioService {
         if (portfolioRepository.findByName(name).isEmpty()) {
             Portfolio portfolio = new Portfolio();
             portfolio.setName(name);
-            portfolio.setDesc(desc);
+            portfolio.setDescription(desc);
             portfolioRepository.save(portfolio);
             log.info("Portfolio created: " + portfolio.toString());
             return portfolio; 
