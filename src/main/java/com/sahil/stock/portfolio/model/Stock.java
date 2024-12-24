@@ -58,5 +58,5 @@ public class Stock {
     private List<Portfolio> portfolios;
 
     @ManyToMany(mappedBy = "stocksInOrder")
-    private List<Portfolio> orders;
+    private List<Order> orders;
 }
