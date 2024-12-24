@@ -62,7 +62,7 @@ docker compose down
 Requests can be made to get the following resources:
 
 - Portfolio
-    - Created At
+    - Created at
     - Name
     - Desc
     - Currency
