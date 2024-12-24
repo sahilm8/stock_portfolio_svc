@@ -2,17 +2,16 @@ spring:
   application:
     name: stock_portfolio_svc
   datasource:
-    url: jdbc:mysql://localhost:3306/${MYSQL_DATABASE}
-    username: ${MYSQL_USER}
-    password: ${MYSQL_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:h2:mem:${TEST_MYSQL_DATABASE}
+    username: ${TEST_MYSQL_USER}
+    password: ${TEST_MYSQL_PASSWORD}
+    driver-class-name: org.h2.Driver
   jpa:
-    open-in-view: false
-    hibernate:
-      ddl-auto: update
-    properties:
       hibernate:
-        format_sql: true
+        ddl-auto: create-drop
+      properties:
+        hibernate:
+          format_sql: true
 
 logging:
   level:
