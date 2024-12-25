@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.sahil.stock.portfolio.util.OrderStatus;
-import com.sahil.stock.portfolio.util.Currency;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,10 +32,10 @@ public class Order {
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
-    private String status = OrderStatus.CREATED.getValue();
+    private String status;
 
     @Column(nullable = false)
-    private String currency = Currency.USD.getValue();
+    private String currency;
 
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal totalValue = BigDecimal.ZERO;
