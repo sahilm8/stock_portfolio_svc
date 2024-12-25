@@ -2,8 +2,8 @@ package com.sahil.stock.portfolio.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -13,10 +13,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import lombok.Data;
 
 @Entity
 @Table(name = "portfolios")
@@ -54,5 +54,5 @@ public class Portfolio {
         joinColumns = @JoinColumn(name = "portfolio_id"),
         inverseJoinColumns = @JoinColumn(name = "stock_id")
     )
-    private Set<Stock> stocks = new HashSet<>();
+    private List<Stock> stocks = new ArrayList<>();
 }

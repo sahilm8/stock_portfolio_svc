@@ -2,9 +2,8 @@ package com.sahil.stock.portfolio.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
@@ -12,8 +11,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Entity
@@ -56,8 +56,10 @@ public class Stock {
     private BigDecimal volume = BigDecimal.ZERO;
 
     @ManyToMany(mappedBy = "stocks")
-    private Set<Portfolio> portfolios = new HashSet<>();
+    @JsonIgnore
+    private List<Portfolio> portfolios = new ArrayList<>();
 
     @ManyToMany(mappedBy = "stocks")
-    private Set<Order> orders = new HashSet<>();
+    @JsonIgnore
+    private List<Order> orders = new ArrayList<>();
 }
