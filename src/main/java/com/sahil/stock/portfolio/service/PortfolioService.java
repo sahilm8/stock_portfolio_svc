@@ -16,11 +16,12 @@ public class PortfolioService {
     @Autowired
     private PortfolioRepository portfolioRepository;
 
-    public Portfolio addPortfolio(String name, String desc) {
+    public Portfolio addPortfolio(String name, String desc, String currency) {
         if (portfolioRepository.findByName(name).isEmpty()) {
             Portfolio portfolio = new Portfolio();
             portfolio.setName(name);
             portfolio.setDescription(desc);
+            portfolio.setCurrency(currency);
             portfolioRepository.save(portfolio);
             log.info("Portfolio created: " + portfolio.toString());
             return portfolio; 
