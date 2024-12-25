@@ -35,6 +35,9 @@ public class Order {
     private String status;
 
     @Column(nullable = false)
+    private String type;
+
+    @Column(nullable = false)
     private String currency;
 
     @Column(nullable = false, precision = 10, scale = 4)
