@@ -2,8 +2,6 @@ package com.sahil.stock.portfolio.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -51,5 +49,8 @@ public class Order {
         joinColumns = @JoinColumn(name = "order_id"),
         inverseJoinColumns = @JoinColumn(name = "stock_id")
     )
-    private Set<Stock> stocks = new HashSet<>();
+    private Stock stock;
+
+    @Column(nullable = false)
+    private Portfolio portfolio;
 }
