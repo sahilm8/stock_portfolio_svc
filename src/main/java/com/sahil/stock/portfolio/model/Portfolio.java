@@ -9,7 +9,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.sahil.stock.portfolio.util.Currency;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -49,9 +48,9 @@ public class Portfolio {
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal totalNumberOfStocks = BigDecimal.ZERO;
 
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "portfolio")
     private List<Stock> stocks = new ArrayList<>();
 
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "portfolio")
     private List<Order> orders = new ArrayList<>();
 }
