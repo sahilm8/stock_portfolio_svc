@@ -2,17 +2,23 @@ package com.sahil.stock.portfolio.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.sahil.stock.portfolio.util.Currency;
 import com.sahil.stock.portfolio.util.OrderStatus;
 import com.sahil.stock.portfolio.util.OrderType;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -42,4 +48,11 @@ public class Order {
 
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal totalNumberOfStocks = BigDecimal.ZERO;
+
+    @ManyToOne
+    @JoinColumn(name = "portfolio_id", nullable = false)
+    private Portfolio portfolio;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<Stock> stocks = new ArrayList<>();
 }
