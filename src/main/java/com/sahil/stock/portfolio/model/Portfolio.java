@@ -2,10 +2,10 @@ package com.sahil.stock.portfolio.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.sahil.stock.portfolio.util.Currency;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,9 +14,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.JoinColumn;
 
 @Entity
 @Table(name = "portfolios")
@@ -37,7 +34,7 @@ public class Portfolio {
     private String description;
 
     @Column(nullable = false)
-    private String currency;
+    private String currency = Currency.USD.getValue();
 
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal totalValue = BigDecimal.ZERO;
@@ -47,12 +44,4 @@ public class Portfolio {
 
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal totalNumberOfStocks = BigDecimal.ZERO;
-
-    @ManyToMany
-    @JoinTable(
-        name = "portfolio_stocks",
-        joinColumns = @JoinColumn(name = "portfolio_id"),
-        inverseJoinColumns = @JoinColumn(name = "stock_id")
-    )
-    private List<Stock> stocks = new ArrayList<>();
 }

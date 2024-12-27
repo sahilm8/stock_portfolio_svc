@@ -2,8 +2,6 @@ package com.sahil.stock.portfolio.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
@@ -12,8 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.ManyToMany;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sahil.stock.portfolio.util.Currency;
+
 import lombok.Data;
 
 @Entity
@@ -29,13 +27,10 @@ public class Stock {
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
     private String symbol;
 
     @Column(nullable = false)
-    private String currency;
+    private String currency = Currency.USD.getValue();
 
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal price = BigDecimal.ZERO;
@@ -54,12 +49,4 @@ public class Stock {
 
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal volume = BigDecimal.ZERO;
-
-    @ManyToMany(mappedBy = "stocks")
-    @JsonIgnore
-    private List<Portfolio> portfolios = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "stocks")
-    @JsonIgnore
-    private List<Order> orders = new ArrayList<>();
 }
