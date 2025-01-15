@@ -11,6 +11,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,6 +41,7 @@ public class Transaction {
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal value;
 
-    @Column(nullable = false)
+    @ManyToMany
+    @JoinTable(name = "transaction_stock", joinColumns = @JoinColumn(name = "transaction_id"), inverseJoinColumns = @JoinColumn(name = "stock_id"))
     private List<Stock> stocks;
 }
