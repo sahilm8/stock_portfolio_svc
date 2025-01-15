@@ -10,4 +10,6 @@ import com.sahil.stock.portfolio.model.Portfolio;
 @Repository
 public interface PortfolioRepository extends JpaRepository<Portfolio, Long> {
     public Optional<Portfolio> findByName(String name);
+
+    public boolean existsByName(String name);
 }
