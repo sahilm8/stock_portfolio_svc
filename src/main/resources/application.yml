@@ -7,7 +7,6 @@ spring:
     password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    open-in-view: false
     hibernate:
       ddl-auto: update
     properties:
@@ -16,8 +15,9 @@ spring:
 
 logging:
   level:
+    com.sahil.stock.portfolio: DEBUG
+    org.springframework.web: DEBUG
     org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
 stock:
-  info_url: http://localhost:8080/api/v1/stock
+  info-url: http://localhost:8080/api/v1/stock
