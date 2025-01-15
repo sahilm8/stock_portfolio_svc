@@ -22,8 +22,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "portfolio")
-public class Portfolio {
+@Table(name = "transaction")
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,12 +33,6 @@ public class Portfolio {
     private Date createdAt;
 
     @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String description;
-
-    @Column(nullable = false)
     private String currency;
 
     @Column(nullable = false, precision = 10, scale = 4)
@@ -46,7 +40,4 @@ public class Portfolio {
 
     @Column(nullable = false)
     private List<Stock> stocks;
-
-    @Column(nullable = false)
-    private List<Transaction> transactions;
 }
