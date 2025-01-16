@@ -1,54 +1,53 @@
 package com.sahil.stock.portfolio.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sahil.stock.portfolio.dto.AddPortfolioRequest;
+import com.sahil.stock.portfolio.dto.AddPortfolioResponse;
+import com.sahil.stock.portfolio.dto.DeletePortfolioRequest;
+import com.sahil.stock.portfolio.dto.DeletePortfolioResponse;
+import com.sahil.stock.portfolio.dto.GetPortfolioRequest;
+import com.sahil.stock.portfolio.dto.GetPortfolioResponse;
+import com.sahil.stock.portfolio.exception.PortfolioAlreadyExistsException;
+import com.sahil.stock.portfolio.exception.PortfolioNotFoundException;
 import com.sahil.stock.portfolio.model.Portfolio;
 import com.sahil.stock.portfolio.repository.PortfolioRepository;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @Transactional
-@Slf4j
+@RequiredArgsConstructor
 public class PortfolioService {
-    @Autowired
-    private PortfolioRepository portfolioRepository;
+    private final PortfolioRepository portfolioRepository;
 
-    public Portfolio addPortfolio(String name, String desc, String currency) {
-        if (portfolioRepository.findByName(name).isEmpty()) {
-            Portfolio portfolio = new Portfolio();
-            portfolio.setName(name);
-            portfolio.setDescription(desc);
-            portfolio.setCurrency(currency);
-            portfolioRepository.save(portfolio);
-            log.info("Portfolio created: " + portfolio.toString());
-            return portfolio; 
+    public AddPortfolioResponse addPortfolio(AddPortfolioRequest addPortfolioRequest) {
+        if (!portfolioRepository.existsByName(addPortfolioRequest.getName())) {
+            Portfolio portfolio = Portfolio.builder()
+                    .name(addPortfolioRequest.getName())
+                    .description(addPortfolioRequest.getDescription())
+                    .build();
+            Portfolio savedPortfolio = portfolioRepository.save(portfolio);
+            return AddPortfolioResponse.builder().portfolio(savedPortfolio).build();
         }
-        Portfolio portfolio = portfolioRepository.findByName(name).get();
-        log.info("Portfolio already exists: " + portfolio.toString());
-        return null;
+        throw new PortfolioAlreadyExistsException("Portfolio already exists");
     }
 
-    public Portfolio getPortfolio(String name) {
-        if (portfolioRepository.findByName(name).isPresent()) {
-            Portfolio portfolio = portfolioRepository.findByName(name).get();
-            log.info("Portfolio found: " + portfolio.toString());
-            return portfolio;
+    public GetPortfolioResponse getPortfolio(GetPortfolioRequest getPortfolioRequest) {
+        if (portfolioRepository.existsByName(getPortfolioRequest.getName())) {
+            Portfolio portfolio = portfolioRepository.findByName(getPortfolioRequest.getName()).get();
+            return GetPortfolioResponse.builder().portfolio(portfolio).build();
         }
-        log.info("Portfolio not found: " + name);
-        return null;
+        throw new PortfolioNotFoundException("Portfolio not found");
     }
 
-    public boolean deletePortfolio(String name) {
-        if (portfolioRepository.findByName(name).isPresent()) {
-            Portfolio portfolio = portfolioRepository.findByName(name).get();
+    public DeletePortfolioResponse deletePortfolio(DeletePortfolioRequest deletePortfolioRequest) {
+        if (portfolioRepository.existsByName(deletePortfolioRequest.getName())) {
+            Portfolio portfolio = portfolioRepository.findByName(deletePortfolioRequest.getName()).get();
             portfolioRepository.delete(portfolio);
-            log.info("Portfolio deleted: " + name);
-            return true;
+            return DeletePortfolioResponse.builder().status("Portfolio deleted successfully").build();
         }
-        log.info("Portfolio not found: " + name);
-        return false;
+        throw new PortfolioNotFoundException("Portfolio not found");
     }
 }
