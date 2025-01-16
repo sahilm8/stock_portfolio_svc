@@ -10,8 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.ManyToMany;
-import java.util.List;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -56,6 +57,11 @@ public class Stock {
     @Column(nullable = false, precision = 10, scale = 4)
     private BigDecimal volume;
 
-    @ManyToMany(mappedBy = "stocks")
-    private List<Transaction> transactions;
+    @ManyToOne
+    @JoinColumn(name = "portfolio_id", nullable = false)
+    private Portfolio portfolio;
+
+    @ManyToOne
+    @JoinColumn(name = "transaction_id", nullable = false)
+    private Transaction transaction;
 }
