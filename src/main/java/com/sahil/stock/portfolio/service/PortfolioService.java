@@ -1,5 +1,7 @@
 package com.sahil.stock.portfolio.service;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +29,10 @@ public class PortfolioService {
             Portfolio portfolio = Portfolio.builder()
                     .name(addPortfolioRequest.getName())
                     .description(addPortfolioRequest.getDescription())
+                    .currency(addPortfolioRequest.getCurrency())
+                    .amount(java.math.BigDecimal.ZERO)
+                    .stocks(new ArrayList<>())
+                    .transactions(new ArrayList<>())
                     .build();
             Portfolio savedPortfolio = portfolioRepository.save(portfolio);
             return AddPortfolioResponse.builder().portfolio(savedPortfolio).build();
