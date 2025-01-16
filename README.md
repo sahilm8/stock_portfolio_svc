@@ -16,78 +16,126 @@ API to manage stock portfolios by deploying automated trading strategies.
 - Spring Web
 - Spring Webflux
 - Reactor Core
+- Spring Validation
+- Jakarta Validation
 - Spring Data JPA
 - MySQL Connector
-- Docker
 - Spring Dotenv
 - Lombok
 - Spring Test
 - H2 Database
 - MacOS DNS Resolver
+- Docker
 
 ## Setup
 
 - Install dependencies:
+
 ```
 ./mvnw clean install
 ```
 
 - Pull Docker MySQL image for running database server:
+
 ```
 docker pull mysql:latest
 ```
 
 - Create an external volume for storing MySQL data:
+
 ```
 docker volume create stock_portfolio_volume
 ```
 
 - Run the container:
+
 ```
 docker compose up -d
 ```
 
 - Start the application:
+
 ```
 ./mvnw spring-boot:run
 ```
 
 - Stop the container:
+
 ```
 docker compose down
 ```
 
 ## Endpoints
 
-Requests can be made to get the following resources:
+Instances can be created, fetched, or deleted for the default model class that is stored in a Docker MySQL volume.
 
-- Portfolio
-    - Created at
-    - Name
-    - Desc
-    - Currency
-    - Total value
-    - Number of companies
-    - Number of stocks
+### Add Model
 
-### Requests
+#### Request
 
-- GET /:
 ```
-curl -i -X GET http://localhost:8080/api/v1/portfolio/
+curl --location 'localhost:8080/api/v1/model/add-model' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Test User",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+}'
 ```
 
-- POST /add-portfolio: 
+#### Response
+
 ```
-curl -i -X POST "http://localhost:8080/api/v1/portfolio/add-portfolio?name=Test&desc=Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+{
+    "model": {
+        "id": 1,
+        "name": "Test User",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "createdAt": "2025-01-15T08:20:33.355+00:00"
+    }
+}
 ```
 
-- GET /get-portfolio:
+### Get Model
+
+#### Request
+
 ```
-curl -i -X GET "http://localhost:8080/api/v1/portfolio/get-portfolio?name=Test"
+curl --location --request GET 'localhost:8080/api/v1/model/get-model' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Test User"
+}'
 ```
 
-- DELETE /delete-portfolio:
+#### Response
+
 ```
-curl -i -X DELETE "http://localhost:8080/api/v1/portfolio/delete-portfolio?name=Test"
+{
+    "model": {
+        "id": 1,
+        "name": "Test User",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "createdAt": "2025-01-15T08:20:33.355+00:00"
+    }
+}
+```
+
+### Delete Model
+
+#### Request
+
+```
+curl --location --request DELETE 'localhost:8080/api/v1/model/delete-model' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Test User"
+}'
+```
+
+#### Response
+
+```
+{
+    "status": "Model deleted successfully"
+}
 ```
