@@ -1,73 +1,64 @@
 package com.sahil.stock.portfolio.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sahil.stock.portfolio.model.Portfolio;
+import com.sahil.stock.portfolio.dto.AddPortfolioRequest;
+import com.sahil.stock.portfolio.dto.AddPortfolioResponse;
+import com.sahil.stock.portfolio.dto.DeletePortfolioRequest;
+import com.sahil.stock.portfolio.dto.DeletePortfolioResponse;
+import com.sahil.stock.portfolio.dto.GetPortfolioRequest;
+import com.sahil.stock.portfolio.dto.GetPortfolioResponse;
 import com.sahil.stock.portfolio.service.PortfolioService;
 
-import lombok.extern.slf4j.Slf4j;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/portfolio")
-@Slf4j
+@RequiredArgsConstructor
+@Validated
 public class PortfolioController {
-    @Autowired
-    private PortfolioService portfolioService;
+    private final PortfolioService portfolioService;
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String home() {
-        log.info("Received request to GET /.");
-        return String.format(
+    public ResponseEntity<String> home() {
+        return ResponseEntity.ok(String.format(
                 "Stock Portfolio API%n%n" +
-                        "Welcome to the portfolio endpoint, you can make the following requests:%n" +
+                        "Welcome to the /portfolio endpoint, you can make the following requests:%n" +
                         "- POST /add-portfolio%n" +
                         "- GET /get-portfolio%n" +
-                        "- DELETE /delete-portfolio%n");
+                        "- DELETE /delete-portfolio%n"));
     }
 
     @PostMapping(value = "/add-portfolio", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Portfolio> addPortfolio(
-        @RequestParam String name,
-        @RequestParam String desc,
-        @RequestParam String currency
-    ) {
-        log.info(
-            "Received request to POST /add-portfolio with arguments: " +
-            name.trim() + ", " + desc.trim() + ", " + currency.trim().toUpperCase()
-        );
-        Portfolio response = portfolioService.addPortfolio(name.trim(), desc.trim(), currency.trim().toUpperCase());
-        if (response != null) {
-            return ResponseEntity.ok(response);
-        }
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    public ResponseEntity<AddPortfolioResponse> addPortfolio(
+            @Valid @RequestBody AddPortfolioRequest addPortfolioRequest) {
+        return ResponseEntity.ok(portfolioService.addPortfolio(addPortfolioRequest));
     }
 
     @GetMapping(value = "/get-portfolio", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Portfolio> getPortfolio(@RequestParam String name) {
-        log.info("Received request to GET /get-portfolio with argument: " + name.trim());
-        Portfolio portfolio = portfolioService.getPortfolio(name.trim());
-        if (portfolio != null) {
-            return ResponseEntity.ok(portfolio);            
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity<GetPortfolioResponse> getPortfolio(
+            @Valid @RequestBody GetPortfolioRequest getPortfolioRequest) {
+        return ResponseEntity.ok(portfolioService.getPortfolio(getPortfolioRequest));
     }
 
     @DeleteMapping(value = "/delete-portfolio", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> deletePortfolio(@RequestParam String name) {
-        log.info("Received request to DELETE /delete-portfolio with argument: " + name.trim());
-        boolean response = portfolioService.deletePortfolio(name.trim());
-        if (response) {
-            return ResponseEntity.ok("Portfolio deleted successfully.");
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity<DeletePortfolioResponse> deletePortfolio(
+            @Valid @RequestBody DeletePortfolioRequest deletePortfolioRequest) {
+        return ResponseEntity.ok(portfolioService.deletePortfolio(deletePortfolioRequest));
+    }
+
+    @GetMapping(value = "/*", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> invalid() {
+        return ResponseEntity
+                .ok("Invalid request, please refer to the README at https://github.com/sahilm8/stock_portfolio_svc");
     }
 }
