@@ -14,8 +14,6 @@ API to manage stock portfolios by deploying automated trading strategies.
 - Maven
 - Spring Boot
 - Spring Web
-- Spring Webflux
-- Reactor Core
 - Spring Validation
 - Jakarta Validation
 - Spring Data JPA
@@ -67,16 +65,23 @@ docker compose down
 
 ## Endpoints
 
-### Add Model
+Requests can be made to perform the following actions:
+
+- Add Portfolio
+- Get Portfolio
+- Delete Portfolio
+
+### Add Portfolio
 
 #### Request
 
 ```
-curl --location 'localhost:8080/api/v1/model/add-model' \
+curl --location 'localhost:8080/api/v1/portfolio/add-portfolio' \
 --header 'Content-Type: application/json' \
 --data '{
-    "name": "Test User",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    "name": "Test Portfolio",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "currency": "USD"
 }'
 ```
 
@@ -84,24 +89,28 @@ curl --location 'localhost:8080/api/v1/model/add-model' \
 
 ```
 {
-    "model": {
+    "portfolio": {
         "id": 1,
-        "name": "Test User",
+        "createdAt": "2025-01-21 14:48:28",
+        "name": "Test Portfolio",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        "createdAt": "2025-01-15T08:20:33.355+00:00"
+        "currency": "USD",
+        "amount": 0,
+        "stocks": [],
+        "transactions": []
     }
 }
 ```
 
-### Get Model
+### Get Portfolio
 
 #### Request
 
 ```
-curl --location --request GET 'localhost:8080/api/v1/model/get-model' \
+curl --location --request GET 'localhost:8080/api/v1/portfolio/get-portfolio' \
 --header 'Content-Type: application/json' \
 --data '{
-    "name": "Test User"
+    "name": "Test Portfolio"
 }'
 ```
 
@@ -109,24 +118,28 @@ curl --location --request GET 'localhost:8080/api/v1/model/get-model' \
 
 ```
 {
-    "model": {
+    "portfolio": {
         "id": 1,
-        "name": "Test User",
+        "createdAt": "2025-01-21 14:48:28",
+        "name": "Test Portfolio",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        "createdAt": "2025-01-15T08:20:33.355+00:00"
+        "currency": "USD",
+        "amount": 0.0000,
+        "stocks": [],
+        "transactions": []
     }
 }
 ```
 
-### Delete Model
+### Delete Portfolio
 
 #### Request
 
 ```
-curl --location --request DELETE 'localhost:8080/api/v1/model/delete-model' \
+curl --location --request DELETE 'localhost:8080/api/v1/portfolio/delete-portfolio' \
 --header 'Content-Type: application/json' \
 --data '{
-    "name": "Test User"
+    "name": "Test Portfolio"
 }'
 ```
 
@@ -134,6 +147,6 @@ curl --location --request DELETE 'localhost:8080/api/v1/model/delete-model' \
 
 ```
 {
-    "status": "Model deleted successfully"
+    "status": "Portfolio deleted successfully"
 }
 ```
