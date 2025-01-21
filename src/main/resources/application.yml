@@ -23,7 +23,7 @@ logging:
     org.hibernate.SQL: DEBUG
 
 stock:
-  info-url: http://localhost:8080/api/v1/stock
+  info-url: ${STOCK_API_URL}
 
 crypto:
-  info-url: http://localhost:8080/api/v1/crypto
+  info-url: ${CRYPTO_API_URL}
