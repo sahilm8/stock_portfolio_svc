@@ -1,6 +1,8 @@
 spring:
   application:
     name: stock_portfolio_svc
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
   datasource:
     url: jdbc:h2:mem:${TEST_DATABASE}
     username: ${TEST_USER}
@@ -22,3 +24,6 @@ logging:
 
 stock:
   info-url: http://localhost:8080/api/v1/stock
+
+crypto:
+  info-url: http://localhost:8080/api/v1/crypto
