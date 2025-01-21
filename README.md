@@ -67,8 +67,6 @@ docker compose down
 
 ## Endpoints
 
-Instances can be created, fetched, or deleted for the default model class that is stored in a Docker MySQL volume.
-
 ### Add Model
 
 #### Request
