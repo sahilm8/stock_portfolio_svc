@@ -16,6 +16,9 @@ spring:
       hibernate:
         format_sql: true
 
+server:
+  port: 8080
+
 logging:
   level:
     com.sahil.stock.portfolio: DEBUG
@@ -24,6 +27,3 @@ logging:
 
 stock:
   info-url: ${STOCK_API_URL}
-
-crypto:
-  info-url: ${CRYPTO_API_URL}
