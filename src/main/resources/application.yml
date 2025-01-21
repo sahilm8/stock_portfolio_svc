@@ -24,6 +24,3 @@ logging:
     com.sahil.stock.portfolio: DEBUG
     org.springframework.web: DEBUG
     org.hibernate.SQL: DEBUG
-
-stock:
-  info-url: ${STOCK_API_URL}
