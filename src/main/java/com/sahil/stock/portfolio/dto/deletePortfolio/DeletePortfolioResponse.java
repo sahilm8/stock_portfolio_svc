@@ -1,6 +1,4 @@
-package com.sahil.stock.portfolio.dto;
-
-import com.sahil.stock.portfolio.model.Portfolio;
+package com.sahil.stock.portfolio.dto.deletePortfolio;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddPortfolioResponse {
-    private Portfolio portfolio;
+public class DeletePortfolioResponse {
+    private String status;
 }

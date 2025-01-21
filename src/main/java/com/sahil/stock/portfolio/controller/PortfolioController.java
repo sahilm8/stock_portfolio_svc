@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sahil.stock.portfolio.dto.AddPortfolioRequest;
-import com.sahil.stock.portfolio.dto.AddPortfolioResponse;
-import com.sahil.stock.portfolio.dto.DeletePortfolioRequest;
-import com.sahil.stock.portfolio.dto.DeletePortfolioResponse;
-import com.sahil.stock.portfolio.dto.GetPortfolioRequest;
-import com.sahil.stock.portfolio.dto.GetPortfolioResponse;
+import com.sahil.stock.portfolio.dto.addPortfolio.AddPortfolioRequest;
+import com.sahil.stock.portfolio.dto.addPortfolio.AddPortfolioResponse;
+import com.sahil.stock.portfolio.dto.deletePortfolio.DeletePortfolioRequest;
+import com.sahil.stock.portfolio.dto.deletePortfolio.DeletePortfolioResponse;
+import com.sahil.stock.portfolio.dto.getPortfolio.GetPortfolioRequest;
+import com.sahil.stock.portfolio.dto.getPortfolio.GetPortfolioResponse;
 import com.sahil.stock.portfolio.service.PortfolioService;
 
 import jakarta.validation.Valid;

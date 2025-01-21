@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sahil.stock.portfolio.dto.AddPortfolioRequest;
-import com.sahil.stock.portfolio.dto.AddPortfolioResponse;
-import com.sahil.stock.portfolio.dto.DeletePortfolioRequest;
-import com.sahil.stock.portfolio.dto.DeletePortfolioResponse;
-import com.sahil.stock.portfolio.dto.GetPortfolioRequest;
-import com.sahil.stock.portfolio.dto.GetPortfolioResponse;
+import com.sahil.stock.portfolio.dto.addPortfolio.AddPortfolioRequest;
+import com.sahil.stock.portfolio.dto.addPortfolio.AddPortfolioResponse;
+import com.sahil.stock.portfolio.dto.deletePortfolio.DeletePortfolioRequest;
+import com.sahil.stock.portfolio.dto.deletePortfolio.DeletePortfolioResponse;
+import com.sahil.stock.portfolio.dto.getPortfolio.GetPortfolioRequest;
+import com.sahil.stock.portfolio.dto.getPortfolio.GetPortfolioResponse;
 import com.sahil.stock.portfolio.exception.PortfolioAlreadyExistsException;
 import com.sahil.stock.portfolio.exception.PortfolioNotFoundException;
 import com.sahil.stock.portfolio.model.Portfolio;

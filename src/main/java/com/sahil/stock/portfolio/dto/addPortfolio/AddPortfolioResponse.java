@@ -1,4 +1,4 @@
-package com.sahil.stock.portfolio.dto;
+package com.sahil.stock.portfolio.dto.addPortfolio;
 
 import com.sahil.stock.portfolio.model.Portfolio;
 
@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetPortfolioResponse {
+public class AddPortfolioResponse {
     private Portfolio portfolio;
 }

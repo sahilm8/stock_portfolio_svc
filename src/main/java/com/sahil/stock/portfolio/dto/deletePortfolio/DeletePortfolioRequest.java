@@ -1,4 +1,4 @@
-package com.sahil.stock.portfolio.dto;
+package com.sahil.stock.portfolio.dto.deletePortfolio;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
