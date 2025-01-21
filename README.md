@@ -76,7 +76,7 @@ Requests can be made to perform the following actions:
 #### Request
 
 ```
-curl --location 'localhost:8080/api/v1/portfolio/add-portfolio' \
+curl --location 'localhost:8080/api/v2/portfolio/add-portfolio' \
 --header 'Content-Type: application/json' \
 --data '{
     "name": "Test Portfolio",
@@ -107,7 +107,7 @@ curl --location 'localhost:8080/api/v1/portfolio/add-portfolio' \
 #### Request
 
 ```
-curl --location --request GET 'localhost:8080/api/v1/portfolio/get-portfolio' \
+curl --location --request GET 'localhost:8080/api/v2/portfolio/get-portfolio' \
 --header 'Content-Type: application/json' \
 --data '{
     "name": "Test Portfolio"
@@ -136,7 +136,7 @@ curl --location --request GET 'localhost:8080/api/v1/portfolio/get-portfolio' \
 #### Request
 
 ```
-curl --location --request DELETE 'localhost:8080/api/v1/portfolio/delete-portfolio' \
+curl --location --request DELETE 'localhost:8080/api/v2/portfolio/delete-portfolio' \
 --header 'Content-Type: application/json' \
 --data '{
     "name": "Test Portfolio"
