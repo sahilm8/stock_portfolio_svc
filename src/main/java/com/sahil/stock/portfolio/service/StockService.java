@@ -5,6 +5,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.sahil.stock.portfolio.dto.getDailyTs.GetDailyTsRequest;
+import com.sahil.stock.portfolio.dto.getDailyTs.GetDailyTsResponse;
+import com.sahil.stock.portfolio.dto.getIntradayTs.GetIntradayTsRequest;
+import com.sahil.stock.portfolio.dto.getIntradayTs.GetIntradayTsResponse;
+import com.sahil.stock.portfolio.dto.getMonthlyTs.GetMonthlyTsRequest;
+import com.sahil.stock.portfolio.dto.getMonthlyTs.GetMonthlyTsResponse;
+import com.sahil.stock.portfolio.dto.getStock.GetStockRequest;
+import com.sahil.stock.portfolio.dto.getStock.GetStockResponse;
+import com.sahil.stock.portfolio.dto.getWeeklyTs.GetWeeklyTsRequest;
+import com.sahil.stock.portfolio.dto.getWeeklyTs.GetWeeklyTsResponse;
+
 import jakarta.annotation.PostConstruct;
 import reactor.core.publisher.Mono;
 
@@ -32,58 +43,59 @@ public class StockService {
                                 .build();
         }
 
-        public Mono<Object> getStock(Object getStockRequest) {
+        public Mono<GetStockResponse> getStock(GetStockRequest getStockRequest) {
                 return webClient
                                 .get()
                                 .uri(uriBuilder -> uriBuilder
                                                 .path("/get-stock")
-                                                .queryParam("", getStockRequest)
+                                                .queryParam("symbol", getStockRequest.getSymbol())
                                                 .build())
                                 .retrieve()
-                                .bodyToMono(Object.class);
+                                .bodyToMono(GetStockResponse.class);
         }
 
-        public Mono<Object> getIntradayTs(Object getIntradayTsRequest) {
+        public Mono<GetIntradayTsResponse> getIntradayTs(GetIntradayTsRequest getIntradayTsRequest) {
                 return webClient
                                 .get()
                                 .uri(uriBuilder -> uriBuilder
                                                 .path("/get-intraday-ts")
-                                                .queryParam("", getIntradayTsRequest)
+                                                .queryParam("symbol", getIntradayTsRequest.getSymbol())
+                                                .queryParam("interval", getIntradayTsRequest.getInterval())
                                                 .build())
                                 .retrieve()
-                                .bodyToMono(Object.class);
+                                .bodyToMono(GetIntradayTsResponse.class);
         }
 
-        public Mono<Object> getDailyTs(Object getDailyTsRequest) {
+        public Mono<GetDailyTsResponse> getDailyTs(GetDailyTsRequest getDailyTsRequest) {
                 return webClient
                                 .get()
                                 .uri(uriBuilder -> uriBuilder
                                                 .path("/get-daily-ts")
-                                                .queryParam("", getDailyTsRequest)
+                                                .queryParam("symbol", getDailyTsRequest.getSymbol())
                                                 .build())
                                 .retrieve()
-                                .bodyToMono(Object.class);
+                                .bodyToMono(GetDailyTsResponse.class);
         }
 
-        public Mono<Object> getWeeklyTs(Object getWeeklyTsRequest) {
+        public Mono<GetWeeklyTsResponse> getWeeklyTs(GetWeeklyTsRequest getWeeklyTsRequest) {
                 return webClient
                                 .get()
                                 .uri(uriBuilder -> uriBuilder
                                                 .path("/get-weekly-ts")
-                                                .queryParam("", getWeeklyTsRequest)
+                                                .queryParam("symbol", getWeeklyTsRequest.getSymbol())
                                                 .build())
                                 .retrieve()
-                                .bodyToMono(Object.class);
+                                .bodyToMono(GetWeeklyTsResponse.class);
         }
 
-        public Mono<Object> getMonthlyTs(Object getMonthlyTsRequest) {
+        public Mono<GetMonthlyTsResponse> getMonthlyTs(GetMonthlyTsRequest getMonthlyTsRequest) {
                 return webClient
                                 .get()
                                 .uri(uriBuilder -> uriBuilder
                                                 .path("/get-monthly-ts")
-                                                .queryParam("", getMonthlyTsRequest)
+                                                .queryParam("symbol", getMonthlyTsRequest.getSymbol())
                                                 .build())
                                 .retrieve()
-                                .bodyToMono(Object.class);
+                                .bodyToMono(GetMonthlyTsResponse.class);
         }
 }
