@@ -18,6 +18,10 @@ API to manage stock portfolios by deploying automated trading strategies.
 - Jakarta Validation
 - Spring Data JPA
 - MySQL Connector
+- Spring Security
+- JWT API
+- JWT Implementation
+- JWT Jackson
 - Spring Dotenv
 - Lombok
 - Spring Test
