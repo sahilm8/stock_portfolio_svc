@@ -4,10 +4,10 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    url: jdbc:h2:mem:${STOCK_PORTFOLIO_TEST_DB}
-    username: ${STOCK_PORTFOLIO_TEST_USER}
-    password: ${STOCK_PORTFOLIO_TEST_PASSWORD}
-    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:stock_portfolio_test_db;DB_CLOSE_DELAY=-1
+      username: sa
+      password: sa
+      driver-class-name: org.h2.Driver
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -19,7 +19,7 @@ server:
   port: 8080
 
 jwt:
-  secret: ${JWT_TEST_SECRET_KEY}
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
 
 logging:
   level:
