@@ -4,9 +4,9 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    url: jdbc:h2:mem:${TEST_DATABASE}
-    username: ${TEST_USER}
-    password: ${TEST_PASSWORD}
+    url: jdbc:h2:mem:${STOCK_PORTFOLIO_TEST_DB}
+    username: ${STOCK_PORTFOLIO_TEST_USER}
+    password: ${STOCK_PORTFOLIO_TEST_PASSWORD}
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
