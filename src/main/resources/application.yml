@@ -19,6 +19,9 @@ spring:
 server:
   port: 8080
 
+jwt:
+  secret: ${JWT_SECRET_KEY}
+
 logging:
   level:
     com.sahil.stock.portfolio: DEBUG
