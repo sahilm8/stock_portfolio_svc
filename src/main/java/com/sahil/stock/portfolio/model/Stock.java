@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "stock")
+@Table(name = "portfolio_stock")
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
