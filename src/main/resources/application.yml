@@ -9,7 +9,7 @@ spring:
     password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    open-in-view: true
+    open-in-view: false
     hibernate:
       ddl-auto: update
     properties:
@@ -22,5 +22,6 @@ server:
 logging:
   level:
     com.sahil.stock.portfolio: DEBUG
+    org.springframework.security: DEBUG
     org.springframework.web: DEBUG
     org.hibernate.SQL: DEBUG

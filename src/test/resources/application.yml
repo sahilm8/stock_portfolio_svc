@@ -9,7 +9,6 @@ spring:
     password: ${TEST_PASSWORD}
     driver-class-name: org.h2.Driver
   jpa:
-    open-in-view: true
     hibernate:
       ddl-auto: create-drop
     properties:
@@ -22,5 +21,6 @@ server:
 logging:
   level:
     com.sahil.stock.portfolio: DEBUG
+    org.springframework.security: DEBUG
     org.springframework.web: DEBUG
     org.hibernate.SQL: DEBUG
