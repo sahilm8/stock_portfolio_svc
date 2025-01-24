@@ -4,7 +4,7 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    url: jdbc:mysql://localhost:3306/${STOCK_PORTFOLIO_DB}
+    jdbc-url: jdbc:mysql://localhost:3306/${STOCK_PORTFOLIO_DB}
     username: ${STOCK_PORTFOLIO_USER}
     password: ${STOCK_PORTFOLIO_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
