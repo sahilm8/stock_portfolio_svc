@@ -30,31 +30,31 @@ public class Stock {
     private Long id;
 
     @CreationTimestamp
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
-    @Column(nullable = false)
+    @Column(name = "symbol", nullable = false)
     private String symbol;
 
-    @Column(nullable = false)
+    @Column(name = "currency", nullable = false)
     private String currency;
 
-    @Column(nullable = false, precision = 10, scale = 4)
+    @Column(name = "price", nullable = false, precision = 10, scale = 4)
     private BigDecimal price;
 
-    @Column(nullable = false, precision = 10, scale = 4)
+    @Column(name = "open", nullable = false, precision = 10, scale = 4)
     private BigDecimal open;
 
-    @Column(nullable = false, precision = 10, scale = 4)
+    @Column(name = "high", nullable = false, precision = 10, scale = 4)
     private BigDecimal high;
 
-    @Column(nullable = false, precision = 10, scale = 4)
+    @Column(name = "low", nullable = false, precision = 10, scale = 4)
     private BigDecimal low;
 
-    @Column(nullable = false, precision = 10, scale = 4)
+    @Column(name = "close", nullable = false, precision = 10, scale = 4)
     private BigDecimal close;
 
-    @Column(nullable = false, precision = 10, scale = 4)
+    @Column(name = "volume", nullable = false, precision = 10, scale = 4)
     private BigDecimal volume;
 
     @ManyToOne

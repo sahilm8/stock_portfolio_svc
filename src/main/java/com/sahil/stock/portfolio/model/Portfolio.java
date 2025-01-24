@@ -34,19 +34,19 @@ public class Portfolio {
     private Long id;
 
     @CreationTimestamp
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Column(name = "currency", nullable = false)
     private String currency;
 
-    @Column(nullable = false, precision = 10, scale = 4)
+    @Column(name = "amount", nullable = false, precision = 10, scale = 4)
     private BigDecimal amount;
 
     @ManyToOne
