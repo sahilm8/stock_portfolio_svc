@@ -4,10 +4,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import com.sahil.stock.portfolio.model.Stock;
-import com.sahil.stock.portfolio.model.Transaction;
-import com.sahil.stock.portfolio.model.User;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,4 +23,39 @@ public class AddPortfolioResponse {
     private User user;
     private List<Stock> stocks;
     private List<Transaction> transactions;
+
+    @Data
+    @Builder
+    public static class User {
+        private Long id;
+        private String firstName;
+        private String lastName;
+        private String email;
+        private String createdAt;
+        private String updatedAt;
+    }
+
+    @Data
+    @Builder
+    public static class Stock {
+        private Long id;
+        private String createdAt;
+        private String symbol;
+        private String currency;
+        private String price;
+        private String open;
+        private String high;
+        private String low;
+        private String close;
+        private String volume;
+    }
+
+    @Data
+    @Builder
+    public static class Transaction {
+        private Long id;
+        private String createdAt;
+        private String currency;
+        private String amount;
+    }
 }
