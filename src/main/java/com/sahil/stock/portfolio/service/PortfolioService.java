@@ -1,6 +1,7 @@
 package com.sahil.stock.portfolio.service;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,9 +59,48 @@ public class PortfolioService {
                     .description(savedPortfolio.getDescription())
                     .currency(savedPortfolio.getCurrency())
                     .amount(savedPortfolio.getAmount())
-                    .user(savedPortfolio.getUser())
-                    .stocks(savedPortfolio.getStocks())
-                    .transactions(savedPortfolio.getTransactions())
+                    .user(
+                        AddPortfolioResponse.User.builder()
+                        .id(savedPortfolio.getUser().getId())
+                        .firstName(savedPortfolio.getUser().getFirstName())
+                        .lastName(savedPortfolio.getUser().getLastName())
+                        .email(savedPortfolio.getUser().getEmail())
+                        .createdAt(savedPortfolio.getUser().getCreatedAt().toString())
+                        .updatedAt(savedPortfolio.getUser().getUpdatedAt().toString())
+                        .build()
+                    )
+                    .stocks(
+                        savedPortfolio.getStocks()
+                        .stream()
+                        .map(stock -> {
+                            return AddPortfolioResponse.Stock.builder()
+                            .id(stock.getId())
+                            .createdAt(stock.getCreatedAt().toString())
+                            .symbol(stock.getSymbol())
+                            .currency(stock.getCurrency())
+                            .price(stock.getPrice().toString())
+                            .open(stock.getOpen().toString())
+                            .high(stock.getHigh().toString())
+                            .low(stock.getLow().toString())
+                            .close(stock.getClose().toString())
+                            .volume(stock.getVolume().toString())
+                            .build();
+                        })
+                        .collect(Collectors.toList())
+                    )
+                    .transactions(
+                        savedPortfolio.getTransactions()
+                        .stream()
+                        .map(transaction -> {
+                            return AddPortfolioResponse.Transaction.builder()
+                            .id(transaction.getId())
+                            .createdAt(transaction.getCreatedAt().toString())
+                            .currency(transaction.getCurrency())
+                            .amount(transaction.getAmount().toString())
+                            .build();
+                        })
+                        .collect(Collectors.toList())
+                    )
                     .build();
         }
         throw new PortfolioAlreadyExistsException("Portfolio already exists");
@@ -77,9 +117,48 @@ public class PortfolioService {
                     .description(portfolio.getDescription())
                     .currency(portfolio.getCurrency())
                     .amount(portfolio.getAmount())
-                    .user(portfolio.getUser())
-                    .stocks(portfolio.getStocks())
-                    .transactions(portfolio.getTransactions())
+                    .user(
+                        GetPortfolioResponse.User.builder()
+                        .id(portfolio.getUser().getId())
+                        .firstName(portfolio.getUser().getFirstName())
+                        .lastName(portfolio.getUser().getLastName())
+                        .email(portfolio.getUser().getEmail())
+                        .createdAt(portfolio.getUser().getCreatedAt().toString())
+                        .updatedAt(portfolio.getUser().getUpdatedAt().toString())
+                        .build()
+                    )
+                    .stocks(
+                        portfolio.getStocks()
+                        .stream()
+                        .map(stock -> {
+                            return GetPortfolioResponse.Stock.builder()
+                            .id(stock.getId())
+                            .createdAt(stock.getCreatedAt().toString())
+                            .symbol(stock.getSymbol())
+                            .currency(stock.getCurrency())
+                            .price(stock.getPrice().toString())
+                            .open(stock.getOpen().toString())
+                            .high(stock.getHigh().toString())
+                            .low(stock.getLow().toString())
+                            .close(stock.getClose().toString())
+                            .volume(stock.getVolume().toString())
+                            .build();
+                        })
+                        .collect(Collectors.toList())
+                    )
+                    .transactions(
+                        portfolio.getTransactions()
+                        .stream()
+                        .map(transaction -> {
+                            return GetPortfolioResponse.Transaction.builder()
+                            .id(transaction.getId())
+                            .createdAt(transaction.getCreatedAt().toString())
+                            .currency(transaction.getCurrency())
+                            .amount(transaction.getAmount().toString())
+                            .build();
+                        })
+                        .collect(Collectors.toList())
+                    )
                     .build();
         }
         throw new PortfolioNotFoundException("Portfolio not found");
