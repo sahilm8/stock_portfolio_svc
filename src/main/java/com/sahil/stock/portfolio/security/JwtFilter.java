@@ -8,6 +8,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.sahil.stock.portfolio.exception.MissingRefreshTokenException;
 import com.sahil.stock.portfolio.exception.UserNotFoundException;
 import com.sahil.stock.portfolio.repository.UserRepository;
 import com.sahil.stock.portfolio.service.AuthService;
@@ -52,10 +53,14 @@ public class JwtFilter extends OncePerRequestFilter {
 
             if (jwtService.isTokenValid(token, userPrincipal)) {
                 setAuthContext(userPrincipal, request);
-            } else if (refreshToken != null) {
-                String newToken = authService.refreshToken(refreshToken).getAccessToken();
-                response.setHeader("Authorization", "Bearer " + newToken);
-                setAuthContext(userPrincipal, request);
+            } else {
+                if (refreshToken != null) {
+                    String newToken = authService.refreshToken(refreshToken).getAccessToken();
+                    response.setHeader("Authorization", "Bearer " + newToken);
+                    setAuthContext(userPrincipal, request);
+                } else {
+                    throw new MissingRefreshTokenException("Refresh token is required");
+                }
             }
         }
 
