@@ -14,8 +14,6 @@ API to manage stock portfolios by deploying automated trading strategies.
 - Maven
 - Spring Boot
 - Spring Web
-- Spring Webflux
-- Reactor Core
 - Spring Validation
 - Jakarta Validation
 - Spring Data JPA
