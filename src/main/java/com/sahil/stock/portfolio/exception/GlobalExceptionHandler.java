@@ -6,8 +6,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import io.jsonwebtoken.ExpiredJwtException;
-
 import java.time.Instant;
 
 @RestControllerAdvice
@@ -24,6 +22,14 @@ public class GlobalExceptionHandler {
 
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, errorMessage);
         problem.setTitle("Validation Failed");
+        problem.setProperty("timestamp", Instant.now());
+        return problem;
+    }
+
+    @ExceptionHandler(MissingRefreshTokenException.class)
+    public ProblemDetail handleMissingRefreshTokenException(MissingRefreshTokenException ex) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, ex.getMessage());
+        problem.setTitle("Missing Refresh Token");
         problem.setProperty("timestamp", Instant.now());
         return problem;
     }
@@ -48,14 +54,6 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleUserNotFoundException(UserNotFoundException ex) {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
         problem.setTitle("User Not Found");
-        problem.setProperty("timestamp", Instant.now());
-        return problem;
-    }
-
-    @ExceptionHandler(ExpiredJwtException.class)
-    public ProblemDetail handleExpiredJwtException(ExpiredJwtException ex) {
-        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, ex.getMessage());
-        problem.setTitle("Token Expired");
         problem.setProperty("timestamp", Instant.now());
         return problem;
     }
