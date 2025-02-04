@@ -22,6 +22,9 @@ server:
 jwt:
   secret: ${JWT_SECRET_KEY}
 
+auth:
+  api-url: ${AUTH_API_URL}
+
 logging:
   level:
     com.sahil.stock.portfolio: DEBUG
