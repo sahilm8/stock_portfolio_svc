@@ -10,6 +10,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.sahil.stock.portfolio.exception.UserNotFoundException;
 import com.sahil.stock.portfolio.repository.UserRepository;
+import com.sahil.stock.portfolio.service.AuthService;
 import com.sahil.stock.portfolio.service.JwtService;
 
 import io.jsonwebtoken.Claims;
@@ -24,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class JwtFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserRepository userRepository;
-
+    private final AuthService authService;
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
@@ -32,6 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain) throws ServletException, IOException {
 
         final String authorization = request.getHeader("Authorization");
+        final String refreshToken = request.getHeader("Refresh-Token");
 
         if (authorization == null || !authorization.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
@@ -48,16 +50,26 @@ public class JwtFilter extends OncePerRequestFilter {
                     .orElseThrow(() -> new UserNotFoundException("User not found: " + email));
 
             if (jwtService.isTokenValid(token, userPrincipal)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                setAuthContext(userPrincipal, request);
+                return;
+            } else {
+                String newToken = authService.refreshToken(refreshToken);
+                response.setHeader("Authorization", "Bearer " + newToken);
+                setAuthContext(userPrincipal, request);
+                return;
+            }
+        }
+
+        filterChain.doFilter(request, response);
+    }
+
+    private void setAuthContext(UserPrincipal userPrincipal, HttpServletRequest request) {
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userPrincipal,
                         null,
                         userPrincipal.getAuthorities());
 
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-            }
-        }
-
-        filterChain.doFilter(request, response);
     }
 }
