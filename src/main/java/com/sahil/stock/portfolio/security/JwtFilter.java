@@ -34,8 +34,12 @@ public class JwtFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain) throws ServletException, IOException {
 
-        final String authorization = request.getHeader("Authorization");
         final String refreshToken = request.getHeader("Refresh-Token");
+        final String authorization = request.getHeader("Authorization");
+
+        if (refreshToken == null) {
+            throw new MissingRefreshTokenException("Refresh token is required");
+        }
 
         if (authorization == null || !authorization.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
@@ -54,13 +58,9 @@ public class JwtFilter extends OncePerRequestFilter {
             if (jwtService.isTokenValid(token, userPrincipal)) {
                 setAuthContext(userPrincipal, request);
             } else {
-                if (refreshToken != null) {
-                    String newToken = authService.refreshToken(refreshToken).getAccessToken();
-                    response.setHeader("Authorization", "Bearer " + newToken);
-                    setAuthContext(userPrincipal, request);
-                } else {
-                    throw new MissingRefreshTokenException("Refresh token is required");
-                }
+                String newToken = authService.refreshToken(refreshToken).getAccessToken();
+                response.setHeader("Authorization", "Bearer " + newToken);
+                setAuthContext(userPrincipal, request);
             }
         }
 
