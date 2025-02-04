@@ -53,7 +53,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 setAuthContext(userPrincipal, request);
                 return;
             } else {
-                String newToken = authService.refreshToken(refreshToken);
+                String newToken = authService.refreshToken(refreshToken).getAccessToken();
                 response.setHeader("Authorization", "Bearer " + newToken);
                 setAuthContext(userPrincipal, request);
                 return;
