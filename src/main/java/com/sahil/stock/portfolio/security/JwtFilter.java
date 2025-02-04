@@ -26,6 +26,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserRepository userRepository;
     private final AuthService authService;
+
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
@@ -51,12 +52,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
             if (jwtService.isTokenValid(token, userPrincipal)) {
                 setAuthContext(userPrincipal, request);
-                return;
-            } else {
+            } else if (refreshToken != null) {
                 String newToken = authService.refreshToken(refreshToken).getAccessToken();
                 response.setHeader("Authorization", "Bearer " + newToken);
                 setAuthContext(userPrincipal, request);
-                return;
             }
         }
 
@@ -65,11 +64,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private void setAuthContext(UserPrincipal userPrincipal, HttpServletRequest request) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userPrincipal,
-                        null,
-                        userPrincipal.getAuthorities());
+                userPrincipal,
+                null,
+                userPrincipal.getAuthorities());
 
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+        authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        SecurityContextHolder.getContext().setAuthentication(authToken);
     }
 }
